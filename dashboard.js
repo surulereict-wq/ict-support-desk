@@ -7,8 +7,8 @@
   // Same backend URL as script.js, plus the DASHBOARD_KEY set in Code.gs.
   // Both must match what you configured on the backend — see
   // backend/README.md, "Connect the dashboard".
-  const ENDPOINT_URL = '';
-  const DASHBOARD_KEY = '';
+  const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxISahUBA1l6Z9XYHr3a0qBw0wTUSNJeGk6H71SNu85M0z70nJtJrzqMzOg6moq6tXV/exec';
+  const DASHBOARD_KEY = 'ictunit2026';
 
   const CATEGORY_LABELS = {
     'ICT-CU': 'Computer Upgrade',
