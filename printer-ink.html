@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Printer Ink Outage &amp; Repairs — ICT Support Desk</title>
+  <meta name="description" content="Report an out-of-ink printer or a mechanical fault to the ICT Unit, Surulere Local Government.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="primary" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <strong>Surulere Local Government</strong>
+        <span>ICT Unit &middot; Support Desk</span>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="computer-upgrade.html">Computer Upgrade</a></li>
+        <li><a href="printer-ink.html" aria-current="page">Printer &amp; Ink</a></li>
+        <li><a href="software-upgrade.html">Software Upgrade</a></li>
+        <li><a href="smartace.html">SmartAce</a></li>
+        <li><a href="document-archiving.html">Archiving</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="eyebrow">Category PR &middot; 02</p>
+      <h1 id="hero-heading">Printer Ink Outage &amp; Repairs</h1>
+      <p class="lede">Report an out-of-ink printer, paper jams, streaking, or any mechanical fault on office printers and scanners.</p>
+    </section>
+
+    <section aria-labelledby="form-heading" class="request-layout">
+
+      <section aria-labelledby="form-heading">
+        <form class="request-form" data-prefix="ICT-PR" novalidate>
+          <h2 id="form-heading">Request details</h2>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="pr-name">Full name</label>
+              <input id="pr-name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="pr-dept">Department</label>
+              <input id="pr-dept" name="department" type="text" required>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="pr-contact">Phone or extension</label>
+              <input id="pr-contact" name="contact" type="tel" required autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="pr-location">Printer location</label>
+              <input id="pr-location" name="location" type="text" placeholder="e.g. Records Office, 2nd floor" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="pr-model">Printer make / model <span class="hint">(if known)</span></label>
+            <input id="pr-model" name="model" type="text">
+          </div>
+
+          <fieldset>
+            <legend>Issue type</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="issueType" value="ink-toner" checked> Out of ink / toner</label>
+              <label><input type="radio" name="issueType" value="paper-jam"> Paper jam</label>
+              <label><input type="radio" name="issueType" value="print-quality"> Print quality</label>
+              <label><input type="radio" name="issueType" value="mechanical"> Mechanical fault</label>
+              <label><input type="radio" name="issueType" value="other"> Other</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Priority</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="priority" value="routine" checked> Routine</label>
+              <label><input type="radio" name="priority" value="urgent"> Urgent — office is blocked</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="pr-details">Issue description</label>
+            <textarea id="pr-details" name="details" rows="4" required placeholder="Describe the fault, any error lights, or sounds."></textarea>
+          </div>
+
+          <button class="submit" type="submit">Submit request</button>
+
+          <div class="stub" id="confirmation-stub">
+            <div class="seal" aria-hidden="true">ICT<br>PR</div>
+            <div class="details">
+              <p class="ref">Reference: —</p>
+              <p>Request received. Note this reference and quote it if you follow up with the desk.</p>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside class="service-info" aria-labelledby="info-heading">
+        <h2 id="info-heading">Service info</h2>
+        <dl>
+          <div>
+            <dt>Typical turnaround</dt>
+            <dd>Same day – 24 hours</dd>
+          </div>
+          <div>
+            <dt>Desk hours</dt>
+            <dd>Mon–Fri, 8:00 AM – 4:00 PM</dd>
+          </div>
+        </dl>
+        <div>
+          <h2 style="margin-bottom:0.5rem;">Before you report</h2>
+          <ul>
+            <li>Check for visible error codes on the display</li>
+            <li>Note the exact office/room location</li>
+            <li>Avoid forcing jammed paper further in</li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <section class="row">
+      <p>&copy; 2026 Surulere Local Government &mdash; ICT Unit.</p>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="mailto:ict@surulerelg.gov.ng">Contact ICT Unit</a></li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

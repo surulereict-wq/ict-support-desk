@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Computer Upgrade Session — ICT Support Desk</title>
+  <meta name="description" content="Request a computer upgrade session from the ICT Unit, Surulere Local Government.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="primary" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <strong>Surulere Local Government</strong>
+        <span>ICT Unit &middot; Support Desk</span>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="computer-upgrade.html" aria-current="page">Computer Upgrade</a></li>
+        <li><a href="printer-ink.html">Printer &amp; Ink</a></li>
+        <li><a href="software-upgrade.html">Software Upgrade</a></li>
+        <li><a href="smartace.html">SmartAce</a></li>
+        <li><a href="document-archiving.html">Archiving</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="eyebrow">Category CU &middot; 01</p>
+      <h1 id="hero-heading">Computer Upgrade Session</h1>
+      <p class="lede">Book a session for RAM/storage upgrades, hardware diagnostics, ageing workstation replacement, or a general performance check.</p>
+    </section>
+
+    <section aria-labelledby="form-heading" class="request-layout">
+
+      <section aria-labelledby="form-heading">
+        <form class="request-form" data-prefix="ICT-CU" novalidate>
+          <h2 id="form-heading">Request details</h2>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="cu-name">Full name</label>
+              <input id="cu-name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="cu-dept">Department</label>
+              <input id="cu-dept" name="department" type="text" required>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="cu-contact">Phone or extension</label>
+              <input id="cu-contact" name="contact" type="tel" required autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="cu-tag">Asset tag / PC ID <span class="hint">(if known)</span></label>
+              <input id="cu-tag" name="assetTag" type="text">
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>Upgrade type</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="upgradeType" value="ram-storage" checked> RAM / storage</label>
+              <label><input type="radio" name="upgradeType" value="full-replacement"> Full replacement</label>
+              <label><input type="radio" name="upgradeType" value="diagnostics"> Diagnostics only</label>
+              <label><input type="radio" name="upgradeType" value="other"> Other</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Priority</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="priority" value="routine" checked> Routine</label>
+              <label><input type="radio" name="priority" value="urgent"> Urgent</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="cu-details">Issue description</label>
+            <textarea id="cu-details" name="details" rows="4" required placeholder="Describe the performance issue, error, or upgrade you need."></textarea>
+          </div>
+
+          <div class="field">
+            <label for="cu-slot">Preferred session date</label>
+            <input id="cu-slot" name="preferredDate" type="date">
+          </div>
+
+          <button class="submit" type="submit">Submit request</button>
+
+          <div class="stub" id="confirmation-stub">
+            <div class="seal" aria-hidden="true">ICT<br>CU</div>
+            <div class="details">
+              <p class="ref">Reference: —</p>
+              <p>Request received. Note this reference and quote it if you follow up with the desk.</p>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside class="service-info" aria-labelledby="info-heading">
+        <h2 id="info-heading">Service info</h2>
+        <dl>
+          <div>
+            <dt>Typical turnaround</dt>
+            <dd>2–3 working days</dd>
+          </div>
+          <div>
+            <dt>Desk hours</dt>
+            <dd>Mon–Fri, 8:00 AM – 4:00 PM</dd>
+          </div>
+        </dl>
+        <div>
+          <h2 style="margin-bottom:0.5rem;">Before you book</h2>
+          <ul>
+            <li>Back up important files where possible</li>
+            <li>Have your asset tag or PC location ready</li>
+            <li>Note any recent error messages</li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <section class="row">
+      <p>&copy; 2026 Surulere Local Government &mdash; ICT Unit.</p>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="mailto:ict@surulerelg.gov.ng">Contact ICT Unit</a></li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
