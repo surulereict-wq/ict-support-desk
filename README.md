@@ -1,73 +1,105 @@
-# ICT Support Desk — Surulere Local Government
-
-A self-contained mini site for the ICT Unit: five request forms, a live
-ticket dashboard, and a Google Sheets backend. Everything below is
-already built — this file is about getting it live at a real URL your
-colleagues can open.
-
-## What's in this folder
-
-| File | Purpose |
-|---|---|
-| `index.html` | Home page, links to all five request forms and the dashboard |
-| `computer-upgrade.html` | Computer Upgrade Session request form |
-| `printer-ink.html` | Printer Ink Outage & Repairs request form |
-| `software-upgrade.html` | Software Upgrade request form |
-| `smartace.html` | SmartAce Registration & Complaint form |
-| `document-archiving.html` | Document Archiving & Retrieval form |
-| `dashboard.html` | Live ticket dashboard (internal use) |
-| `styles.css` | Shared styling for every page |
-| `script.js` | Submits requests from the five forms |
-| `dashboard.js` | Reads and updates tickets on the dashboard |
-| `backend/Code.gs` | Google Apps Script — the backend |
-| `backend/README.md` | Step-by-step backend + dashboard setup |
-| `ICT-Support-Desk-Process-Documentation.docx` | Official process write-up |
-
-The site is **static** — plain HTML/CSS/JS, no build step, no framework.
-That means hosting it is just "put these files somewhere," which is why
-you have several easy options below.
-
-## 1. Set up the backend first
-
-Do this before hosting, so the forms work immediately once the site is
-live. Follow `backend/README.md` end to end — it covers both the
-request-logging backend and connecting the dashboard. Takes about
-10 minutes total.
-
-## 2. Choose where to host it
-
-All three options are free and require no server maintenance.
-
-### Option A — GitHub Pages (recommended if you're comfortable with Git)
-1. Create a free GitHub account and a new repository (e.g. `ict-support-desk`).
-2. Upload this whole folder's contents to the repository (drag-and-drop
-   works on github.com — no command line needed).
-3. Go to **Settings > Pages**, set source to the `main` branch, root folder.
-4. GitHub gives you a URL like `https://yourname.github.io/ict-support-desk/`.
-5. Share that URL, or point a custom domain at it later if the LG has one.
-
-### Option B — Netlify Drop (fastest, zero account needed to try)
-1. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
-2. Drag this whole folder onto the page.
-3. Netlify gives you a live URL immediately (e.g. `random-name.netlify.app`).
-4. Create a free account afterward if you want to keep the site and get
-   a more permanent URL.
-
-### Option C — Surulere LG's own web server
-If the LG already has a web server or cPanel-style hosting for its
-website, this is likely the most appropriate long-term home:
-1. Connect via FTP/SFTP or the hosting control panel's file manager.
-2. Upload all files (keeping `backend/` as reference material — it
-   doesn't need to be uploaded, since Google runs that part).
-3. Point a subdomain at it, e.g. `support.surulerelg.gov.ng`.
-
-## 3. After it's live
-
-- Bookmark `dashboard.html` for ICT Unit staff; it's not linked
-  publicly from anywhere except the site's own nav, but it also isn't
-  password-protected beyond the dashboard key — don't share that URL
-  outside the unit.
-- Test each of the five forms once from the live URL to confirm
-  submissions reach the Google Sheet.
-- Anything needing to change later (new category, different SLA text,
-  new turnaround time) is a plain HTML/CSS edit — no rebuild step.
+ICT Support Desk — Backend Setup
+This connects the website's forms to a Google Sheet, so every request
+submitted on any of the five pages gets logged automatically with a
+timestamp and reference number. No server to buy, host, or maintain —
+Google runs it.
+1. Create the log sheet
+Go to sheets.google.com and create a new,
+blank spreadsheet. Name it something like "ICT Support Desk — Log".
+Rename the first tab (bottom-left) to Log.
+2. Add the backend script
+In the sheet, go to Extensions > Apps Script.
+Delete the placeholder `function myFunction() {}` code.
+Open `Code.gs` from this folder, copy everything, and paste it in.
+Click the save icon (or Ctrl/Cmd+S).
+3. Deploy it as a web app
+Click Deploy > New deployment.
+Click the gear icon next to "Select type" and choose Web app.
+Set:
+Execute as: Me
+Who has access: Anyone
+Click Deploy. The first time, Google will ask you to authorize
+the script — click through the "unverified app" warning (it's your
+own script, this is expected for personal Apps Script projects).
+Copy the Web app URL. It ends in `/exec`.
+4. Connect the website
+Open `script.js` (in the main site folder, not this one).
+Near the top, find:
+```js
+   const ENDPOINT_URL = '';
+   ```
+Paste your URL between the quotes:
+```js
+   const ENDPOINT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
+   ```
+Save, and re-upload `script.js` to wherever the site is hosted.
+5. Connect the dashboard
+The dashboard (`dashboard.html`) reads tickets from the same backend,
+protected by a simple shared key so the ticket list isn't public.
+In `Code.gs`, find:
+```js
+   const DASHBOARD_KEY = 'change-this-key';
+   ```
+Change it to any password-like string of your choosing, save, and
+redeploy (Deploy > Manage deployments > pencil icon > New version
+> Deploy — editing the code alone doesn't update a live deployment).
+Open `dashboard.js` and set both:
+```js
+   const ENDPOINT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
+   const DASHBOARD_KEY = 'the-same-string-you-set-above';
+   ```
+Save and re-upload `dashboard.js`. Open `dashboard.html` — it should
+populate with tickets and let you update status inline (Open / In
+Progress / Resolved), which writes straight back to the sheet.
+6. Post a service status update (internet/ISP downtime, etc.)
+Redeploy after adding this feature (Deploy > Manage deployments > pencil
+icon > New version > Deploy) so the site picks up the new `status`
+endpoint — otherwise skip straight to using it if you're setting this up
+fresh.
+The first time anyone loads the site after this is deployed, a second
+tab called "Status" is created automatically in your Google Sheet,
+with one row already filled in: `Operational | All services running normally. | [timestamp]`.
+To post an update, just edit that row directly — no code, no redeploy:
+Open the Google Sheet, click the Status tab
+Column A (State) — type one of: `Operational`, `Degraded`, or `Down`
+Column B (Message) — a short note, e.g. `Internet down since 9:40am — ISP notified, restoration expected by 2pm.`
+Column C (Updated) — optional, mostly for your own reference
+A banner appears automatically across the entire site within about a
+minute of your change:
+`Operational` → no banner shown at all
+`Degraded` → amber banner
+`Down` → red banner
+When the issue is resolved, change State back to `Operational` and the
+banner disappears site-wide immediately.
+7. Feedback / satisfaction (automatic — nothing to set up)
+Once a ticket is marked Resolved on the dashboard, the requester can
+go to `check-status.html`, enter their reference number, and leave a
+Satisfied / Not satisfied rating with an optional comment. It's
+recorded in two new columns on the same row in the Log tab —
+Satisfaction and Feedback.
+If your Sheet already existed before this feature, those two columns
+are added automatically the next time anyone submits a request or opens
+the dashboard — no manual editing needed.
+The dashboard now also shows a Feedback column per ticket and a
+Satisfied count in the overview stats.
+8. Test it
+Open any request page (e.g. `printer-ink.html`), fill in the form, and
+submit. Within a few seconds a new row should appear in the Log tab
+of your sheet, and the on-screen confirmation stub will still show the
+reference number as before.
+Notes
+If `ENDPOINT_URL` is left blank, the site still works exactly as
+before — it just shows the confirmation on-screen without logging
+anywhere. This means the site never breaks even if the backend isn't
+set up yet.
+If a submission fails to reach the sheet (e.g. no internet), the site
+still shows the reference number to the requester, with a small note
+that it couldn't confirm the connection — nothing is silently lost
+from the requester's point of view, but you should ask them to also
+report it directly if that keeps happening.
+To change who can see the sheet, use the normal Google Sheets
+Share button — this does not affect the web app's ability to
+write to it.
+You can later add columns (e.g. "Assigned to", "Resolved date") to
+the sheet directly; the script only appends to existing columns and
+won't be affected by extra ones you add manually.
