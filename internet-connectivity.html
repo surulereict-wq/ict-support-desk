@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Internet Connectivity Issue — ICT Support Desk</title>
+  <meta name="description" content="Report an internet or network connectivity issue to the ICT Unit, Surulere Local Government.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="primary" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <strong>Surulere Local Government</strong>
+        <span>ICT Unit &middot; Support Desk</span>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="computer-upgrade.html">Computer Upgrade</a></li>
+        <li><a href="printer-ink.html">Printer &amp; Ink</a></li>
+        <li><a href="software-upgrade.html">Software Upgrade</a></li>
+        <li><a href="smartace.html">SmartAce</a></li>
+        <li><a href="document-archiving.html">Archiving</a></li>
+        <li><a href="internet-connectivity.html" aria-current="page">Internet</a></li>
+        <li><a href="check-status.html">Check Status</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="eyebrow">Category IC &middot; 06</p>
+      <h1 id="hero-heading">Internet Connectivity Issue</h1>
+      <p class="lede">Report no internet access, a slow or unstable connection, or an office-wide outage. ICT provides and monitors the internet connection for all offices.</p>
+    </section>
+
+    <section aria-labelledby="form-heading" class="request-layout">
+
+      <section aria-labelledby="form-heading">
+        <form class="request-form" data-prefix="ICT-IC" novalidate>
+          <h2 id="form-heading">Request details</h2>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="ic-name">Full name</label>
+              <input id="ic-name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="ic-dept">Department</label>
+              <input id="ic-dept" name="department" type="text" required>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="ic-contact">Phone or extension</label>
+              <input id="ic-contact" name="contact" type="tel" required autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="ic-location">Office / location</label>
+              <input id="ic-location" name="location" type="text" placeholder="e.g. Treasury Department, ground floor" required>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>Issue type</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="issueType" value="no-connection" checked> No connection at all</label>
+              <label><input type="radio" name="issueType" value="intermittent"> Intermittent / drops frequently</label>
+              <label><input type="radio" name="issueType" value="slow"> Slow / unstable speed</label>
+              <label><input type="radio" name="issueType" value="single-device"> One device only, rest of office fine</label>
+              <label><input type="radio" name="issueType" value="other"> Other</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Scope</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="scope" value="single-device" checked> Affects one device / user</label>
+              <label><input type="radio" name="scope" value="whole-office"> Affects the whole office</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Priority</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="priority" value="routine" checked> Routine</label>
+              <label><input type="radio" name="priority" value="urgent"> Urgent — office fully offline</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="ic-details">Issue description</label>
+            <textarea id="ic-details" name="details" rows="4" required placeholder="When did it start? Any error messages, or specific times it drops?"></textarea>
+          </div>
+
+          <button class="submit" type="submit">Submit request</button>
+
+          <div class="stub" id="confirmation-stub">
+            <div class="seal" aria-hidden="true">ICT<br>IC</div>
+            <div class="details">
+              <p class="ref">Reference: —</p>
+              <p>Request received. Note this reference and quote it if you follow up with the desk.</p>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside class="service-info" aria-labelledby="info-heading">
+        <h2 id="info-heading">Service info</h2>
+        <dl>
+          <div>
+            <dt>Typical turnaround</dt>
+            <dd>Same day for office-wide outages</dd>
+          </div>
+          <div>
+            <dt>Desk hours</dt>
+            <dd>Mon–Fri, 8:00 AM – 4:00 PM</dd>
+          </div>
+        </dl>
+        <div>
+          <h2 style="margin-bottom:0.5rem;">Before you report</h2>
+          <ul>
+            <li>Check whether the outage banner at the top of the site is already showing this issue</li>
+            <li>Note whether it's just your device or the whole office</li>
+            <li>Try a different device if one is available, to help narrow down the cause</li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <section class="row">
+      <p>&copy; 2026 Surulere Local Government &mdash; ICT Unit. &middot; <a href="tel:+2348100285278">0810 028 5278</a></p>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="mailto:ict@surulerelg.gov.ng">Contact ICT Unit</a></li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+
+  <script src="status-banner.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
