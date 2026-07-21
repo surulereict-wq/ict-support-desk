@@ -31,7 +31,7 @@
     if (refEl) refEl.textContent = `Reference: ${reference}`;
     if (sealEl) sealEl.textContent = prefix;
     if (noteEl) {
-      noteEl.textContent = note || 'Request received. Note this reference and quote it if you follow up with the desk.';
+      noteEl.textContent = note || 'Request received. Note this reference — you can check progress or leave feedback anytime on the Check Status page.';
     }
     stub.classList.add('is-visible');
     stub.setAttribute('role', 'status');
