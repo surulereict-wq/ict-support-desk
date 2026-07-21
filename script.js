@@ -6,7 +6,7 @@
   // Paste your Google Apps Script Web App URL here once deployed —
   // see backend/README.md. Leave blank and the site still works,
   // it just won't log requests anywhere.
-  const ENDPOINT_URL = '';
+  const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxISahUBA1l6Z9XYHr3a0qBw0wTUSNJeGk6H71SNu85M0z70nJtJrzqMzOg6moq6tXV/exec';
 
   const form = document.querySelector('form.request-form');
   if (!form) return;
