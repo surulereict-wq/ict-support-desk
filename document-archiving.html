@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartAce Registration &amp; Complaint — ICT Support Desk</title>
-  <meta name="description" content="Register on SmartAce or report a payslip and documentation issue to the ICT Unit, Surulere Local Government.">
+  <title>Document Archiving &amp; Retrieval — ICT Support Desk</title>
+  <meta name="description" content="Submit documents for archiving or request retrieval of an archived record from the ICT Unit, Surulere Local Government.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,70 +22,78 @@
         <li><a href="computer-upgrade.html">Computer Upgrade</a></li>
         <li><a href="printer-ink.html">Printer &amp; Ink</a></li>
         <li><a href="software-upgrade.html">Software Upgrade</a></li>
-        <li><a href="smartace.html" aria-current="page">SmartAce</a></li>
-        <li><a href="document-archiving.html">Archiving</a></li>      </ul>
+        <li><a href="smartace.html">SmartAce</a></li>
+        <li><a href="document-archiving.html" aria-current="page">Archiving</a></li>      </ul>
     </nav>
   </header>
 
   <main id="main-content">
 
     <section class="hero" aria-labelledby="hero-heading">
-      <p class="eyebrow">Category SA &middot; 04</p>
-      <h1 id="hero-heading">SmartAce Registration &amp; Complaint</h1>
-      <p class="lede">Register on the SmartAce platform, or raise a complaint about a payslip discrepancy or an official document generated through it.</p>
+      <p class="eyebrow">Category DA &middot; 05</p>
+      <h1 id="hero-heading">Document Archiving &amp; Retrieval</h1>
+      <p class="lede">Submit physical or digital files for archiving, or request retrieval of a record that has already been archived.</p>
     </section>
 
     <section aria-labelledby="form-heading" class="request-layout">
 
       <section aria-labelledby="form-heading">
-        <form class="request-form" data-prefix="ICT-SA" novalidate>
+        <form class="request-form" data-prefix="ICT-DA" novalidate>
           <h2 id="form-heading">Request details</h2>
 
           <fieldset>
-            <legend>Purpose</legend>
+            <legend>Request type</legend>
             <div class="radio-group">
-              <label><input type="radio" name="purpose" value="registration" checked> New registration</label>
-              <label><input type="radio" name="purpose" value="payslip-complaint"> Payslip complaint</label>
-              <label><input type="radio" name="purpose" value="document-complaint"> Documentation complaint</label>
+              <label><input type="radio" name="requestType" value="archive" checked> Archive new documents</label>
+              <label><input type="radio" name="requestType" value="retrieve"> Retrieve an archived record</label>
             </div>
           </fieldset>
 
           <div class="field-row">
             <div class="field">
-              <label for="sa-name">Full name</label>
-              <input id="sa-name" name="name" type="text" required autocomplete="name">
+              <label for="da-name">Full name</label>
+              <input id="da-name" name="name" type="text" required autocomplete="name">
             </div>
             <div class="field">
-              <label for="sa-staffid">Staff ID</label>
-              <input id="sa-staffid" name="staffId" type="text" required>
+              <label for="da-dept">Department</label>
+              <input id="da-dept" name="department" type="text" required>
             </div>
           </div>
 
           <div class="field-row">
             <div class="field">
-              <label for="sa-dept">Department</label>
-              <input id="sa-dept" name="department" type="text" required>
+              <label for="da-contact">Phone or extension</label>
+              <input id="da-contact" name="contact" type="tel" required autocomplete="tel">
             </div>
             <div class="field">
-              <label for="sa-contact">Phone or email</label>
-              <input id="sa-contact" name="contact" type="text" required>
+              <label for="da-refno">Existing file/reference no. <span class="hint">(for retrieval)</span></label>
+              <input id="da-refno" name="existingRef" type="text">
             </div>
           </div>
 
           <div class="field">
-            <label for="sa-period">Pay period affected <span class="hint">(for payslip complaints — e.g. June 2026)</span></label>
-            <input id="sa-period" name="payPeriod" type="text">
+            <label for="da-docname">Document title / description</label>
+            <input id="da-docname" name="documentTitle" type="text" required placeholder="e.g. 2024 Staff Nominal Roll, Ward 3">
           </div>
 
+          <fieldset>
+            <legend>Format</legend>
+            <div class="radio-group">
+              <label><input type="radio" name="format" value="physical" checked> Physical (paper)</label>
+              <label><input type="radio" name="format" value="digital"> Digital file</label>
+              <label><input type="radio" name="format" value="both"> Both</label>
+            </div>
+          </fieldset>
+
           <div class="field">
-            <label for="sa-details">Details</label>
-            <textarea id="sa-details" name="details" rows="4" required placeholder="For registration: role and grade level. For complaints: describe the discrepancy or document error."></textarea>
+            <label for="da-details">Additional details</label>
+            <textarea id="da-details" name="details" rows="4" placeholder="Volume of documents, date range, department of origin, or reason for retrieval."></textarea>
           </div>
 
           <button class="submit" type="submit">Submit request</button>
 
           <div class="stub" id="confirmation-stub">
-            <div class="seal" aria-hidden="true">ICT<br>SA</div>
+            <div class="seal" aria-hidden="true">ICT<br>DA</div>
             <div class="details">
               <p class="ref">Reference: —</p>
               <p>Request received. Note this reference and quote it if you follow up with the desk.</p>
@@ -99,7 +107,7 @@
         <dl>
           <div>
             <dt>Typical turnaround</dt>
-            <dd>3–5 working days</dd>
+            <dd>2–4 working days</dd>
           </div>
           <div>
             <dt>Desk hours</dt>
@@ -107,27 +115,15 @@
           </div>
         </dl>
         <div>
-          <h2 style="margin-bottom:0.5rem;">Have ready</h2>
+          <h2 style="margin-bottom:0.5rem;">Before you submit</h2>
           <ul>
-            <li>Staff ID and department</li>
-            <li>Affected pay period, for payslip issues</li>
-            <li>A copy of the document in question, if disputing content</li>
+            <li>Group documents by year or subject where possible</li>
+            <li>Have the original reference number ready for retrievals</li>
+            <li>Sensitive records require HOD sign-off</li>
           </ul>
         </div>
       </aside>
 
-    </section>
-
-    <section class="faq" aria-labelledby="faq-heading">
-      <h2 id="faq-heading" style="margin-bottom:0.75rem; font-size:1.3rem;">SmartAce FAQ</h2>
-      <details>
-        <summary>I'm not yet registered — can I still log a complaint?</summary>
-        <p>No. Select "New registration" first; complaints are tied to an existing SmartAce profile and Staff ID.</p>
-      </details>
-      <details>
-        <summary>How long until a payslip correction reflects?</summary>
-        <p>Corrections are typically reviewed within the standard turnaround, but may reflect in the following pay cycle depending on when payroll is processed.</p>
-      </details>
     </section>
 
   </main>
