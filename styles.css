@@ -336,6 +336,37 @@ footer.site-footer a:hover { color: var(--gold); }
   border: 0;
 }
 
+/* ---------- Status banner ---------- */
+.status-banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  align-items: baseline;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
+  text-align: center;
+  justify-content: center;
+}
+.status-banner-label {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+}
+.status-banner.degraded {
+  background: #fbe6c8;
+  color: #6b420b;
+}
+.status-banner.down {
+  background: #f6cfc8;
+  color: #7a2415;
+}
+.status-banner-phone {
+  font-weight: 700;
+  text-decoration: underline;
+  color: inherit;
+}
+
 /* ---------- Dashboard ---------- */
 .dash-toolbar {
   display: flex;
