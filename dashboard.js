@@ -24,7 +24,8 @@
     'ICT-PR': 'Printer & Ink',
     'ICT-SW': 'Software Upgrade',
     'ICT-SA': 'SmartAce',
-    'ICT-DA': 'Document Archiving'
+    'ICT-DA': 'Document Archiving',
+    'ICT-IC': 'Internet Connectivity'
   };
 
   const ticketBody = document.getElementById('ticket-body');
@@ -122,6 +123,7 @@
     document.getElementById('stat-progress').textContent = allTickets.filter((t) => t.status === 'In Progress').length;
     document.getElementById('stat-resolved').textContent = allTickets.filter((t) => t.status === 'Resolved').length;
     document.getElementById('stat-urgent').textContent = allTickets.filter((t) => (t.priority || '').toLowerCase() === 'urgent').length;
+    document.getElementById('stat-satisfied').textContent = allTickets.filter((t) => t.satisfaction === 'Satisfied').length;
 
     ticketBody.innerHTML = '';
 
@@ -142,6 +144,7 @@
         <td>${escapeHtml(t.department || '—')}</td>
         <td><span class="${priorityBadgeClass(t.priority)}">${escapeHtml(t.priority || 'routine')}</span></td>
         <td></td>
+        <td>${feedbackCell(t)}</td>
       `;
 
       const statusCell = tr.children[6];
@@ -159,6 +162,14 @@
 
       ticketBody.appendChild(tr);
     });
+  }
+
+  function feedbackCell(t) {
+    if (!t.satisfaction) return '<span style="color:var(--muted);">—</span>';
+    const good = t.satisfaction === 'Satisfied';
+    const badge = `<span class="badge ${good ? 'resolved' : 'priority-urgent'}">${escapeHtml(t.satisfaction)}</span>`;
+    const comment = t.feedback ? ` title="${escapeHtml(t.feedback)}"` : '';
+    return `<span${comment}>${badge}</span>`;
   }
 
   function escapeHtml(str) {
