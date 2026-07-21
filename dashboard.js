@@ -8,7 +8,16 @@
   // Both must match what you configured on the backend — see
   // backend/README.md, "Connect the dashboard".
   const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxISahUBA1l6Z9XYHr3a0qBw0wTUSNJeGk6H71SNu85M0z70nJtJrzqMzOg6moq6tXV/exec';
-  const DASHBOARD_KEY = 'ictunit2026';
+
+  // The key is never stored in this file. It's asked for on load and kept
+  // only in this browser tab's memory (sessionStorage) — cleared when the
+  // tab closes. The backend itself checks whether the key is correct, so a
+  // wrong or missing key simply gets no data back.
+  let DASHBOARD_KEY = sessionStorage.getItem('ictDashboardKey');
+  if (!DASHBOARD_KEY) {
+    DASHBOARD_KEY = window.prompt('Enter the ICT dashboard access key:') || '';
+    sessionStorage.setItem('ictDashboardKey', DASHBOARD_KEY);
+  }
 
   const CATEGORY_LABELS = {
     'ICT-CU': 'Computer Upgrade',
@@ -31,6 +40,9 @@
 
   if (!ENDPOINT_URL || !DASHBOARD_KEY) {
     configNotice.hidden = false;
+    configNotice.querySelector('p').textContent = ENDPOINT_URL
+      ? 'No access key entered — refresh this page to try again.'
+      : "Dashboard isn't connected yet. Open dashboard.js and set ENDPOINT_URL — see backend/README.md.";
     statsSection.hidden = true;
     document.querySelector('.dash-toolbar').hidden = true;
     document.querySelector('.ticket-table-wrap').hidden = true;
@@ -46,7 +58,10 @@
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if (data.status !== 'ok') throw new Error(data.message || 'Unknown error');
+        if (data.status !== 'ok') {
+          sessionStorage.removeItem('ictDashboardKey');
+          throw new Error('Incorrect key. Refresh the page to try again.');
+        }
         allTickets = data.tickets || [];
         render();
       })
