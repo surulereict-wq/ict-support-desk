@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICT Support Dashboard — Surulere Local Government</title>
+  <meta name="description" content="Live ticket dashboard for the ICT Unit, Surulere Local Government.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="primary" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <strong>Surulere Local Government</strong>
+        <span>ICT Unit &middot; Support Desk</span>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="computer-upgrade.html">Computer Upgrade</a></li>
+        <li><a href="printer-ink.html">Printer &amp; Ink</a></li>
+        <li><a href="software-upgrade.html">Software Upgrade</a></li>
+        <li><a href="smartace.html">SmartAce</a></li>
+        <li><a href="document-archiving.html">Archiving</a></li>
+        <li><a href="ict-staff-3841.html" aria-current="page">ICT Staff</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="eyebrow">Internal &middot; ICT Unit only</p>
+      <h1 id="hero-heading">ICT Support Dashboard</h1>
+      <p class="lede">Live view of tickets submitted across all five support categories, pulled directly from the support log.</p>
+    </section>
+
+    <section aria-label="Configuration notice" id="config-notice" hidden>
+      <p class="dash-config">
+        Dashboard isn't connected yet. Open <code>dashboard.js</code> and set
+        <code>ENDPOINT_URL</code> and <code>DASHBOARD_KEY</code> to match your
+        deployed backend — see <code>backend/README.md</code>.
+      </p>
+    </section>
+
+    <section aria-labelledby="stats-heading" id="stats-section">
+      <h2 id="stats-heading" style="margin-bottom:1rem; font-size:1.3rem;">Overview</h2>
+      <section class="stat-grid" id="stat-grid">
+        <article class="stat-card"><p class="num" id="stat-total">—</p><p class="label">Total tickets</p></article>
+        <article class="stat-card accent"><p class="num" id="stat-open">—</p><p class="label">Open</p></article>
+        <article class="stat-card"><p class="num" id="stat-progress">—</p><p class="label">In progress</p></article>
+        <article class="stat-card"><p class="num" id="stat-resolved">—</p><p class="label">Resolved</p></article>
+        <article class="stat-card accent"><p class="num" id="stat-urgent">—</p><p class="label">Urgent</p></article>
+      </section>
+    </section>
+
+    <section aria-labelledby="tickets-heading">
+      <h2 id="tickets-heading" style="margin-bottom:1rem; font-size:1.3rem;">Tickets</h2>
+
+      <section class="dash-toolbar" aria-label="Filters and actions" style="margin-bottom:1rem;">
+        <div class="filters">
+          <label class="visually-hidden" for="filter-category">Category</label>
+          <select id="filter-category">
+            <option value="">All categories</option>
+            <option value="ICT-CU">Computer Upgrade</option>
+            <option value="ICT-PR">Printer &amp; Ink</option>
+            <option value="ICT-SW">Software Upgrade</option>
+            <option value="ICT-SA">SmartAce</option>
+            <option value="ICT-DA">Document Archiving</option>
+          </select>
+          <select id="filter-status">
+            <option value="">All statuses</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+          <input type="text" id="filter-search" placeholder="Search name, dept, reference…">
+        </div>
+        <button class="ghost" id="refresh-btn" type="button">Refresh</button>
+      </section>
+
+      <section class="ticket-table-wrap">
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th scope="col">Reference</th>
+              <th scope="col">Submitted</th>
+              <th scope="col">Category</th>
+              <th scope="col">Requester</th>
+              <th scope="col">Department</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody id="ticket-body">
+            <!-- populated by dashboard.js -->
+          </tbody>
+        </table>
+      </section>
+
+      <p class="dash-empty" id="empty-state" hidden>No tickets match the current filters.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <section class="row">
+      <p>&copy; 2026 Surulere Local Government &mdash; ICT Unit.</p>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="mailto:ict@surulerelg.gov.ng">Contact ICT Unit</a></li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+
+  <script src="dashboard.js" defer></script>
+</body>
+</html>
