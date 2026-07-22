@@ -56,6 +56,7 @@
         <article class="stat-card"><p class="num" id="stat-resolved">—</p><p class="label">Resolved</p></article>
         <article class="stat-card accent"><p class="num" id="stat-urgent">—</p><p class="label">Urgent</p></article>
         <article class="stat-card"><p class="num" id="stat-satisfied">—</p><p class="label">Satisfied</p></article>
+        <article class="stat-card accent"><p class="num" id="stat-overdue">—</p><p class="label">Overdue</p></article>
       </section>
     </section>
 
@@ -82,7 +83,10 @@
           </select>
           <input type="text" id="filter-search" placeholder="Search name, dept, reference…">
         </div>
-        <button class="ghost" id="refresh-btn" type="button">Refresh</button>
+        <div style="display:flex; gap:0.6rem;">
+          <button class="ghost" id="export-btn" type="button">Export CSV</button>
+          <button class="ghost" id="refresh-btn" type="button">Refresh</button>
+        </div>
       </section>
 
       <section class="ticket-table-wrap">
