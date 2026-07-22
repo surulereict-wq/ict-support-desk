@@ -28,16 +28,29 @@
     'ICT-IC': 'Internet Connectivity'
   };
 
+  // Turnaround promised on each request page, used to flag tickets
+  // running past that window while still Open or In Progress.
+  const SLA_DAYS = {
+    'ICT-CU': 3,
+    'ICT-PR': 1,
+    'ICT-SW': 2,
+    'ICT-SA': 5,
+    'ICT-DA': 4,
+    'ICT-IC': 1
+  };
+
   const ticketBody = document.getElementById('ticket-body');
   const emptyState = document.getElementById('empty-state');
   const configNotice = document.getElementById('config-notice');
   const statsSection = document.getElementById('stats-section');
   const refreshBtn = document.getElementById('refresh-btn');
+  const exportBtn = document.getElementById('export-btn');
   const filterCategory = document.getElementById('filter-category');
   const filterStatus = document.getElementById('filter-status');
   const filterSearch = document.getElementById('filter-search');
 
   let allTickets = [];
+  let currentFiltered = [];
 
   if (!ENDPOINT_URL || !DASHBOARD_KEY) {
     configNotice.hidden = false;
@@ -102,6 +115,14 @@
     return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
   }
 
+  function isOverdue(t) {
+    if (!t.timestamp || (t.status || 'Open') === 'Resolved') return false;
+    const slaDays = SLA_DAYS[t.category];
+    if (!slaDays) return false;
+    const ageMs = Date.now() - new Date(t.timestamp).getTime();
+    return ageMs > slaDays * 24 * 60 * 60 * 1000;
+  }
+
   function render() {
     const catFilter = filterCategory.value;
     const statusFilter = filterStatus.value;
@@ -116,6 +137,7 @@
       }
       return true;
     });
+    currentFiltered = filtered;
 
     // Stats always reflect the full set, not the filtered view.
     document.getElementById('stat-total').textContent = allTickets.length;
@@ -124,6 +146,8 @@
     document.getElementById('stat-resolved').textContent = allTickets.filter((t) => t.status === 'Resolved').length;
     document.getElementById('stat-urgent').textContent = allTickets.filter((t) => (t.priority || '').toLowerCase() === 'urgent').length;
     document.getElementById('stat-satisfied').textContent = allTickets.filter((t) => t.satisfaction === 'Satisfied').length;
+    const overdueStat = document.getElementById('stat-overdue');
+    if (overdueStat) overdueStat.textContent = allTickets.filter(isOverdue).length;
 
     ticketBody.innerHTML = '';
 
@@ -160,6 +184,14 @@
       select.addEventListener('change', () => updateStatus(t.reference, select.value));
       statusCell.appendChild(select);
 
+      if (isOverdue(t)) {
+        const overdueBadge = document.createElement('span');
+        overdueBadge.className = 'badge priority-urgent';
+        overdueBadge.style.marginLeft = '0.4rem';
+        overdueBadge.textContent = 'Overdue';
+        statusCell.appendChild(overdueBadge);
+      }
+
       ticketBody.appendChild(tr);
     });
   }
@@ -172,6 +204,41 @@
     return `<span${comment}>${badge}</span>`;
   }
 
+  function exportCsv() {
+    if (currentFiltered.length === 0) {
+      window.alert('No tickets to export with the current filters.');
+      return;
+    }
+
+    const columns = ['reference', 'timestamp', 'category', 'name', 'department', 'contact', 'priority', 'status', 'satisfaction', 'feedback', 'purposeType', 'details'];
+    const header = ['Reference', 'Submitted', 'Category', 'Name', 'Department', 'Contact', 'Priority', 'Status', 'Satisfaction', 'Feedback', 'Type', 'Details'];
+
+    const rows = currentFiltered.map((t) => columns.map((col) => {
+      let val = t[col] || '';
+      if (col === 'category') val = CATEGORY_LABELS[val] || val;
+      if (col === 'timestamp') val = formatDate(val);
+      return csvEscape(val);
+    }));
+
+    const csv = [header.map(csvEscape).join(','), ...rows.map((r) => r.join(','))].join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const today = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `ict-support-desk-tickets-${today}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function csvEscape(val) {
+    const s = String(val ?? '');
+    if (/[",\r\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+    return s;
+  }
+
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, '&amp;')
@@ -180,6 +247,7 @@
   }
 
   refreshBtn.addEventListener('click', fetchTickets);
+  if (exportBtn) exportBtn.addEventListener('click', exportCsv);
   filterCategory.addEventListener('change', render);
   filterStatus.addEventListener('change', render);
   filterSearch.addEventListener('input', render);
