@@ -77,10 +77,21 @@ header.site-header > nav {
 }
 .brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
   text-decoration: none;
   color: #eceef0;
   line-height: 1.2;
+}
+.brand-logo {
+  height: 3.2rem;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
 .brand strong {
   font-family: var(--serif);
