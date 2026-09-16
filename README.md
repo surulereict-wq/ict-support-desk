@@ -82,7 +82,46 @@ are added automatically the next time anyone submits a request or opens
 the dashboard — no manual editing needed.
 The dashboard now also shows a Feedback column per ticket and a
 Satisfied count in the overview stats.
-8. Test it
+8. Set up the weekly summary email
+In `Code.gs`, find `const SUMMARY_RECIPIENT = 'ict@surulerelg.gov.ng';` near the top and change the email address to whoever should receive it (yourself, your supervisor, or both — for multiple recipients, separate with a comma inside the same quotes, e.g. `'you@x.com,boss@x.com'`)
+Save
+In the left sidebar of the Apps Script editor, click the clock icon ("Triggers")
+Click + Add Trigger (bottom right)
+Set it up as:
+Choose which function to run: sendWeeklySummary
+Choose which deployment should run: Head
+Select event source: Time-driven
+Select type of time based trigger: Week timer
+Select day of week: whichever day you want the report (e.g. Monday)
+Select time of day: e.g. 8am–9am
+Click Save — you may be asked to authorize again, same as before
+To send yourself a test email right now instead of waiting for the trigger: in the Apps Script toolbar, use the function dropdown (next to Debug) to select `sendWeeklySummary`, then click Run. Check your inbox.
+9. Dashboard: Export CSV and Overdue flag (automatic — nothing to set up)
+The dashboard now has an Export CSV button next to Refresh — it downloads whatever's currently shown (respecting your category/status/search filters) as a spreadsheet file, useful for reporting upward.
+Tickets still Open or In Progress past their category's stated turnaround are automatically flagged Overdue in the table and counted in the overview stats. The thresholds live in `dashboard.js` as `SLA_DAYS` if you ever want to adjust them.
+10. Staff Directory for SmartAce support (automatic — nothing to set up)
+`staff-registration.html` lets newly recruited senior and junior staff
+register their details once — full name, Staff ID, cadre, department,
+phone, email, employment date, and their SmartAce password. SmartAce is
+used only for monthly payslip printing and locks after 4 failed logins,
+so ICT keeps the password on file to get staff back in quickly rather
+than running a full reset process every time.
+Records are split into two sheet tabs — "Staff Directory - Senior"
+and "Staff Directory - Junior" — chosen automatically based on the
+Cadre selected at registration. Both are created automatically the
+first time someone in that cadre registers.
+`staff-directory-9214.html` is the ICT-only search page — same
+`DASHBOARD_KEY` protection as the ticket dashboard, and it searches
+across both sheets at once. Use it to confirm someone's identity (name,
+Staff ID, department match) and hand them their password directly.
+This page is deliberately not linked from the public nav — same
+pattern as the ticket dashboard. Bookmark it internally.
+This sheet holds personal contact details and login passwords.
+Keep the `DASHBOARD_KEY` limited to the ICT staff who actually need
+it — a small, known list, not shared broadly. If anyone outside that
+list ever sees the key, treat every password in the sheet as
+compromised and have those staff change them.
+11. Test it
 Open any request page (e.g. `printer-ink.html`), fill in the form, and
 submit. Within a few seconds a new row should appear in the Log tab
 of your sheet, and the on-screen confirmation stub will still show the
