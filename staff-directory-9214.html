@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Directory — ICT Support Desk</title>
+  <meta name="description" content="ICT staff directory lookup for SmartAce identity verification — Surulere Local Government.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="primary" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <img src="logo.png" alt="Surulere Local Government ICT Unit logo" class="brand-logo">
+        <span class="brand-text"><strong>Surulere Local Government</strong><span>ICT Unit &middot; Support Desk</span></span>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="computer-upgrade.html">Computer Upgrade</a></li>
+        <li><a href="printer-ink.html">Printer &amp; Ink</a></li>
+        <li><a href="software-upgrade.html">Software Upgrade</a></li>
+        <li><a href="smartace.html">SmartAce</a></li>
+        <li><a href="document-archiving.html">Archiving</a></li>
+        <li><a href="internet-connectivity.html">Internet</a></li>
+        <li><a href="check-status.html">Check Status</a></li>
+        <li><a href="staff-directory-9214.html" aria-current="page">Staff Directory</a></li>
+        <li><a href="ict-staff-3841.html">ICT Staff</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" aria-labelledby="hero-heading">
+      <p class="eyebrow">Internal &middot; ICT Unit only</p>
+      <h1 id="hero-heading">Staff Directory — SmartAce Support</h1>
+      <p class="lede">Look up a staff member's registered details to confirm identity before resetting a SmartAce password or resolving a payslip login issue.</p>
+    </section>
+
+    <section aria-label="Configuration notice" id="config-notice" hidden>
+      <p class="dash-config"></p>
+    </section>
+
+    <section aria-labelledby="stats-heading" id="stats-section">
+      <section class="stat-grid" id="stat-grid">
+        <article class="stat-card"><p class="num" id="stat-total">—</p><p class="label">Registered staff</p></article>
+        <article class="stat-card accent"><p class="num" id="stat-senior">—</p><p class="label">Senior staff</p></article>
+        <article class="stat-card"><p class="num" id="stat-junior">—</p><p class="label">Junior staff</p></article>
+      </section>
+    </section>
+
+    <section aria-labelledby="records-heading">
+      <h2 id="records-heading" style="margin-bottom:1rem; font-size:1.3rem;">Search Staff Records</h2>
+
+      <section class="dash-toolbar" aria-label="Filters and actions" style="margin-bottom:1rem;">
+        <div class="filters">
+          <label class="visually-hidden" for="filter-cadre">Cadre</label>
+          <select id="filter-cadre">
+            <option value="">All cadres</option>
+            <option value="Senior Staff">Senior Staff</option>
+            <option value="Junior Staff">Junior Staff</option>
+          </select>
+          <input type="text" id="filter-search" placeholder="Search name, Staff ID, department…">
+        </div>
+        <div style="display:flex; gap:0.6rem;">
+          <button class="ghost" id="export-btn" type="button">Export CSV</button>
+          <button class="ghost" id="refresh-btn" type="button">Refresh</button>
+        </div>
+      </section>
+
+      <section class="ticket-table-wrap">
+        <table class="ticket-table">
+          <thead>
+            <tr>
+              <th scope="col">Full Name</th>
+              <th scope="col">Staff ID</th>
+              <th scope="col">Cadre</th>
+              <th scope="col">Department</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Employment Date</th>
+              <th scope="col">Password</th>
+            </tr>
+          </thead>
+          <tbody id="ticket-body"></tbody>
+        </table>
+      </section>
+
+      <p class="dash-empty" id="empty-state" hidden>No staff records match the current search.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <section class="row">
+      <p>&copy; 2026 Surulere Local Government &mdash; ICT Unit. &middot; <a href="tel:+2348100285278">0810 028 5278</a></p>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="mailto:ict@surulerelg.gov.ng">Contact ICT Unit</a></li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+
+  <script src="staff-directory.js" defer></script>
+</body>
+</html>
