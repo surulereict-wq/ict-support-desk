@@ -19,9 +19,9 @@
  * exportable ticket log.
  *
  * DASHBOARD ACCESS:
- * dashboard.html reads tickets through this same web app, via
+ * ict-staff-3841.html (the ICT Staff Portal) reads tickets through this same web app, via
  * GET ?action=list&key=YOUR_KEY — set DASHBOARD_KEY below to any
- * password-like string, then paste the same value into dashboard.html
+ * password-like string, then paste the same value into ict-portal.js
  * (see backend/README.md, section "Connect the dashboard").
  * This keeps the ticket list from being readable by anyone who
  * merely guesses the /exec URL.
@@ -58,7 +58,8 @@
  *
  * Records are stored in two separate sheet tabs — "Staff Directory -
  * Senior" and "Staff Directory - Junior" — chosen automatically based
- * on the Cadre selected at registration. staff-directory-9214.html lets
+ * on the Cadre selected at registration. The ICT Staff Portal's Staff
+ * Directory tab (ict-staff-3841.html) lets
  * ICT search both (same DASHBOARD_KEY protection as the ticket
  * dashboard). Keep that key limited to the ICT staff who need it — this
  * sheet holds personal contact details and login passwords.
@@ -297,14 +298,15 @@ function getOrCreateStaffSheetByName(sheetName) {
 
 
 // GET ?action=list&key=DASHBOARD_KEY: returns all logged tickets as JSON,
-// used by dashboard.html.
+// used by the ICT Staff Portal (ict-staff-3841.html).
 // GET ?action=status: returns the current service status banner — public,
 // no key required, since this is meant to be visible to everyone.
 function doGet(e) {
   const params = (e && e.parameter) || {};
+  const incomingKey = String(params.key || '').trim();
 
   if (params.action === 'list') {
-    if (params.key !== DASHBOARD_KEY) {
+    if (incomingKey !== DASHBOARD_KEY) {
       return jsonResponse({ status: 'error', message: 'Invalid or missing key.' });
     }
     return jsonResponse({ status: 'ok', tickets: readAllTickets() });
@@ -319,7 +321,7 @@ function doGet(e) {
   }
 
   if (params.action === 'staffList') {
-    if (params.key !== DASHBOARD_KEY) {
+    if (incomingKey !== DASHBOARD_KEY) {
       return jsonResponse({ status: 'error', message: 'Invalid or missing key.' });
     }
     return jsonResponse({ status: 'ok', staff: readAllStaff() });
