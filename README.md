@@ -33,9 +33,11 @@ Paste your URL between the quotes:
    const ENDPOINT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
    ```
 Save, and re-upload `script.js` to wherever the site is hosted.
-5. Connect the dashboard
-The dashboard (`dashboard.html`) reads tickets from the same backend,
-protected by a simple shared key so the ticket list isn't public.
+5. Connect the ICT Staff Portal
+The ICT Staff Portal (`ict-staff-3841.html`) reads tickets and staff
+records from the same backend, protected by a shared key so this data
+isn't public. It's a single page — the "Tickets" and "Staff Directory"
+tabs share one key entry rather than asking twice.
 In `Code.gs`, find:
 ```js
    const DASHBOARD_KEY = 'change-this-key';
@@ -43,14 +45,15 @@ In `Code.gs`, find:
 Change it to any password-like string of your choosing, save, and
 redeploy (Deploy > Manage deployments > pencil icon > New version
 > Deploy — editing the code alone doesn't update a live deployment).
-Open `dashboard.js` and set both:
+Open `ict-portal.js` and set:
 ```js
    const ENDPOINT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
-   const DASHBOARD_KEY = 'the-same-string-you-set-above';
    ```
-Save and re-upload `dashboard.js`. Open `dashboard.html` — it should
-populate with tickets and let you update status inline (Open / In
-Progress / Resolved), which writes straight back to the sheet.
+Save and re-upload `ict-portal.js`. Open `ict-staff-3841.html` — it
+will prompt for the key once (kept only in that browser tab's memory,
+never stored in the file), then populate both tabs: tickets with
+inline status updates, and the staff directory once you've added
+staff records.
 6. Post a service status update (internet/ISP downtime, etc.)
 Redeploy after adding this feature (Deploy > Manage deployments > pencil
 icon > New version > Deploy) so the site picks up the new `status`
@@ -98,7 +101,7 @@ Click Save — you may be asked to authorize again, same as before
 To send yourself a test email right now instead of waiting for the trigger: in the Apps Script toolbar, use the function dropdown (next to Debug) to select `sendWeeklySummary`, then click Run. Check your inbox.
 9. Dashboard: Export CSV and Overdue flag (automatic — nothing to set up)
 The dashboard now has an Export CSV button next to Refresh — it downloads whatever's currently shown (respecting your category/status/search filters) as a spreadsheet file, useful for reporting upward.
-Tickets still Open or In Progress past their category's stated turnaround are automatically flagged Overdue in the table and counted in the overview stats. The thresholds live in `dashboard.js` as `SLA_DAYS` if you ever want to adjust them.
+Tickets still Open or In Progress past their category's stated turnaround are automatically flagged Overdue in the table and counted in the overview stats. The thresholds live in `ict-portal.js` as `SLA_DAYS` if you ever want to adjust them.
 10. Staff Directory for SmartAce support (automatic — nothing to set up)
 `staff-registration.html` lets newly recruited senior and junior staff
 register their details once — full name, Staff ID, cadre, department,
@@ -110,12 +113,16 @@ Records are split into two sheet tabs — "Staff Directory - Senior"
 and "Staff Directory - Junior" — chosen automatically based on the
 Cadre selected at registration. Both are created automatically the
 first time someone in that cadre registers.
-`staff-directory-9214.html` is the ICT-only search page — same
-`DASHBOARD_KEY` protection as the ticket dashboard, and it searches
-across both sheets at once. Use it to confirm someone's identity (name,
-Staff ID, department match) and hand them their password directly.
-This page is deliberately not linked from the public nav — same
-pattern as the ticket dashboard. Bookmark it internally.
+Important: these tabs must live inside the exact same Google Sheet
+as your `Log` and `Status` tabs — the same file you opened
+`Extensions > Apps Script` from. A separate, standalone Google Sheet
+titled "Staff Directory" will not work, even with correctly named
+tabs — the script can only see the one spreadsheet it's bound to.
+The "Staff Directory" tab in the ICT Staff Portal (`ict-staff-3841.html`)
+is the search view — same `DASHBOARD_KEY` protection as the Tickets
+tab (one key unlocks both), and it searches both sheets at once. Use
+it to confirm someone's identity (name, Staff ID, department match)
+and hand them their password directly.
 This sheet holds personal contact details and login passwords.
 Keep the `DASHBOARD_KEY` limited to the ICT staff who actually need
 it — a small, known list, not shared broadly. If anyone outside that
