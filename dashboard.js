@@ -15,7 +15,7 @@
   // wrong or missing key simply gets no data back.
   let DASHBOARD_KEY = sessionStorage.getItem('ictDashboardKey');
   if (!DASHBOARD_KEY) {
-    DASHBOARD_KEY = window.prompt('Enter the ICT dashboard access key:') || '';
+    DASHBOARD_KEY = (window.prompt('Enter the ICT dashboard access key:') || '').trim();
     sessionStorage.setItem('ictDashboardKey', DASHBOARD_KEY);
   }
 
