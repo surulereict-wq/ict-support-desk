@@ -378,6 +378,54 @@ footer.site-footer a:hover { color: var(--gold); }
   color: inherit;
 }
 
+/* ---------- Portal tabs ---------- */
+.portal-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+.portal-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  margin-bottom: -2px;
+}
+.portal-tab:hover { color: var(--ink); }
+.portal-tab.active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+
+/* ---------- Portal tabs ---------- */
+.portal-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+.portal-tab {
+  background: transparent;
+  border: none;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+.portal-tab:hover { color: var(--ink); }
+.portal-tab.active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+
 /* ---------- Dashboard ---------- */
 .dash-toolbar {
   display: flex;
