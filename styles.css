@@ -544,6 +544,20 @@ td select.status-select {
   font-size: 0.85rem;
 }
 
+/* ---------- How It Works video ---------- */
+.video-wrap {
+  max-width: 42rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.video-wrap video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 45rem) {
   .request-layout { grid-template-columns: 1fr; }
